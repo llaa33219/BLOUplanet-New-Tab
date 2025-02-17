@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>New Tab</title>
+  <link rel="icon" href="https://i.imgur.com/2MkyDCh.png" type="image/x-icon" />
+  <link rel="stylesheet" href="newtab.css" />
+</head>
+<body>
+  <!-- 배경 변경 아이콘 (오른쪽 상단) -->
+  <div id="backgroundChangeBtn" title="배경 변경">
+    &#9881;
+  </div>
+
+  <!-- 중앙 구글 로고 -->
+  <div class="logo-container">
+    <a href="https://github.com/llaa33219">
+      <img
+        src="https://raw.githubusercontent.com/llaa33219/BLOUplanet-logo/refs/heads/main/New%20Project%20(15)%20(Copy).png"
+        class="logo"
+      />
+    </a>
+  </div>
+
+  <!-- 검색창 -->
+  <div class="search-container">
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+      <input
+        type="text"
+        name="q"
+        placeholder="google search"
+        class="search-input"
+      />
+    </form>
+  </div>
+
+  <!-- 바로가기 섹션 -->
+  <div class="shortcuts-section">
+    <div id="custom-shortcuts-container" class="shortcuts-container"></div>
+  </div>
+
+  <!-- +아이콘 추가 모달 -->
+  <div id="shortcutModal" class="modal">
+    <div class="modal-content">
+      <span id="modalClose" class="modal-close">&times;</span>
+      <h2>Add shortcut</h2>
+      <input type="text" id="modalShortcutTitle" placeholder="Name" />
+      <input type="url" id="modalShortcutUrl" placeholder="URL" />
+      <button id="modalAddShortcutBtn" class="modal-add-btn">Add</button>
+    </div>
+  </div>
+
+  <!-- 우클릭 메뉴 (삭제/변경) -->
+  <div id="contextMenu" class="context-menu">
+    <ul>
+      <li id="cmEdit">Change</li>
+      <li id="cmDelete">Delete</li>
+    </ul>
+  </div>
+
+  <!-- 바로가기 변경 모달 -->
+  <div id="shortcutEditModal" class="modal">
+    <div class="modal-content">
+      <span id="editModalClose" class="modal-close">&times;</span>
+      <h2>Change shortcut</h2>
+      <input type="text" id="editShortcutTitle" placeholder="Name" />
+      <input type="url" id="editShortcutUrl" placeholder="URL" />
+      <button id="editShortcutSaveBtn" class="modal-add-btn">Save</button>
+    </div>
+  </div>
+
+  <!-- 배경 설정 모달 -->
+  <div id="backgroundModal" class="modal">
+    <div class="modal-content bg-modal-content">
+      <span id="backgroundModalClose" class="modal-close">&times;</span>
+      <h2>Background settings</h2>
+      <div class="bg-options">
+        <div class="bg-option-section">
+          <h3>Preset background</h3>
+          <div id="presetOptions" class="preset-options-container">
+            <!-- 기존 프리셋 -->
+            <div class="preset-option" 
+                 data-value="linear-gradient(135deg, #f5f7fa, #c3cfe2)" 
+                 style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2);">
+            </div>
+            <div class="preset-option" 
+                 data-value="linear-gradient(135deg, #ff9a9e, #fad0c4)" 
+                 style="background: linear-gradient(135deg, #ff9a9e, #fad0c4);">
+            </div>
+            <div class="preset-option" 
+                 data-value="linear-gradient(135deg, #a18cd1, #fbc2eb)" 
+                 style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+            </div>
+            <div class="preset-option" 
+                 data-value="linear-gradient(135deg, #fbc2eb, #a6c1ee)" 
+                 style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);">
+            </div>
+
+            <!-- 원형 / 원뿔형 / 반복 그라데이션 -->
+            <div class="preset-option" 
+                 data-value="radial-gradient(circle, #ff9966, #ff5e62)" 
+                 style="background: radial-gradient(circle, #ff9966, #ff5e62);">
+            </div>
+            <div class="preset-option" 
+                 data-value="conic-gradient(from 180deg at 50% 50%, #a8edea, #fed6e3)" 
+                 style="background: conic-gradient(from 180deg at 50% 50%, #a8edea, #fed6e3);">
+            </div>
+            <div class="preset-option" 
+                 data-value="repeating-radial-gradient(circle, #a18cd1 0, #fbc2eb 20%, #a18cd1 40%)" 
+                 style="background: repeating-radial-gradient(circle, #a18cd1 0, #fbc2eb 20%, #a18cd1 40%);">
+            </div>
+
+            <!-- 기존 애니메이션 프리셋 -->
+            <div class="preset-option" 
+                 data-value="animatedGradient1" 
+                 style="background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedGradient2" 
+                 style="background: linear-gradient(0deg, #ff9a9e, #fad0c4, #fad0c4);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedGradient3" 
+                 style="background: linear-gradient(45deg, #ff7e5f, #feb47b);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedGradient4" 
+                 style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedGradient5" 
+                 style="background: linear-gradient(90deg, #f7971e, #ffd200);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedGradient6" 
+                 style="background: linear-gradient(-60deg, #355c7d, #6c5b7b, #c06c84);">
+            </div>
+
+            <!-- 새로운 애니메이션 프리셋 -->
+            <div class="preset-option" 
+                 data-value="animatedRadial1" 
+                 style="background: radial-gradient(circle, #ff5f6d, #ffc371);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedConic1" 
+                 style="background: conic-gradient(from 0deg, #7f7fd5, #86a8e7, #91eae4);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedElliptical1" 
+                 style="background: radial-gradient(ellipse at center, #ff9a9e, #fad0c4);">
+            </div>
+            <div class="preset-option" 
+                 data-value="animatedConic2" 
+                 style="background: conic-gradient(from 0deg, #ffafbd, #ffc3a0);">
+            </div>
+          </div>
+        </div>
+        <div class="bg-option-section">
+          <h3>Custom color</h3>
+          <input type="color" id="customColorInput" value="#ffffff" />
+        </div>
+        <div class="bg-option-section">
+          <h3>Custom image</h3>
+          <input type="file" id="customImageInput" accept="image/*" />
+        </div>
+      </div>
+      <div class="bg-modal-buttons">
+        <button id="backgroundCancelBtn" class="modal-add-btn cancel-btn">Cancel</button>
+        <button id="backgroundSaveBtn" class="modal-add-btn save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="newtab.js"></script>
+</body>
+</html>

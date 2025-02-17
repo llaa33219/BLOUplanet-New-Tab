@@ -1,0 +1,535 @@
+/* newtab.css */
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 전체 레이아웃 */
+html, body {
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  /* 사용자가 적용한 배경은 newtab.js에서 동적으로 설정 */
+}
+
+/* 중앙 구글 로고 */
+.logo-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.logo {
+  width: 700px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  /* 부드럽고 자연스러운 그림자 - drop-shadow로 수정 */
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.logo:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+/* 검색창 */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.search-container form {
+  position: relative;
+}
+
+.search-input {
+  width: 650px;
+  padding: 15px 20px;
+  font-size: 20px;
+  border: 1px solid #dfe1e5;
+  border-radius: 30px;
+  outline: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 8px rgba(66, 133, 244, 0.5);
+  border-color: #4285f4;
+}
+
+/* 바로가기 섹션 */
+.shortcuts-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.shortcuts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1100px;
+  gap: 16px;
+  padding: 0 10px;
+}
+
+/* 바로가기 아이템 */
+.shortcut-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.shortcut-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.shortcut-item:active {
+  transform: scale(0.95);
+}
+
+.shortcut-item img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.shortcut-item:hover img {
+  transform: scale(1.1);
+}
+
+.shortcut-item a {
+  text-decoration: none !important;
+}
+
+.shortcut-title {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+/* +아이콘 */
+.add-shortcut-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #888;
+  width: 64px;
+  height: 64px;
+  border: 2px dashed #bbb;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.shortcut-item:hover .add-shortcut-item {
+  transform: scale(1.1);
+  border-color: #888;
+}
+
+.add-shortcut-label {
+  color: #555;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* 모달(공통) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: modalFadeIn 0.4s ease;
+}
+
+/* 모달 애니메이션 */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 2px solid #4285f4;
+  padding-bottom: 8px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="url"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="url"]:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 5px rgba(66,133,244,0.5);
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-add-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  background-color: #4285f4;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.modal-add-btn:hover {
+  background-color: #357ae8;
+}
+
+/* 우클릭 컨텍스트 메뉴 */
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  width: 140px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.context-menu li:hover {
+  background-color: #f7f7f7;
+}
+
+/* 드래그 앤 드롭 스타일 */
+.shortcut-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.shortcut-item.drag-over {
+  border: 2px solid #4285f4;
+  background-color: #f1f8ff;
+}
+
+/* 배경 변경 아이콘 (오른쪽 상단 동그란 아이콘) */
+#backgroundChangeBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 20px;
+}
+
+/* Preset 옵션 스타일 */
+.preset-option {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.preset-option:hover {
+  transform: scale(1.1);
+}
+
+/* Background Modal Custom Styling */
+.bg-modal-content {
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+}
+
+.bg-options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bg-option-section h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #444;
+}
+
+.preset-options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bg-modal-buttons {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.modal-add-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.cancel-btn {
+  background-color: #888;
+}
+
+.save-btn {
+  background-color: #4285f4;
+  margin-left: 10px;
+}
+
+/* 사용자 지정 색상 / 이미지 업로드 input 스타일링 */
+.bg-option-section input[type="color"] {
+  width: 48px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  overflow: hidden;
+  margin-top: 5px;
+  transition: box-shadow 0.2s ease;
+}
+
+.bg-option-section input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+.bg-option-section input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: none;
+}
+
+.bg-option-section input[type="color"]:focus {
+  box-shadow: 0 0 5px rgba(66,133,244,0.5);
+  outline: none;
+}
+
+.bg-option-section input[type="file"] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* 크롬/엣지 등 모던 브라우저에서의 file 버튼 스타일 */
+.bg-option-section input[type="file"]::file-selector-button {
+  padding: 6px 12px;
+  margin-right: 10px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bg-option-section input[type="file"]::file-selector-button:hover {
+  background-color: #357ae8;
+}
+
+/* -------------------------------------
+   애니메이션 그라데이션을 위한 keyframes
+   ------------------------------------- */
+@keyframes animatedGradient1 {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes animatedGradient2 {
+  0%   { background-position: 50% 0%; }
+  50%  { background-position: 50% 100%; }
+  100% { background-position: 50% 0%; }
+}
+
+/* 기존 애니메이션 프리셋 */
+.animated-gradient-1 {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: animatedGradient1 15s ease infinite;
+}
+
+.animated-gradient-2 {
+  background: linear-gradient(0deg, #ff9a9e, #fad0c4, #fad0c4);
+  background-size: 400% 400%;
+  animation: animatedGradient2 10s ease infinite;
+}
+
+@keyframes animatedGradient3 {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+.animated-gradient-3 {
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+  background-size: 400% 400%;
+  animation: animatedGradient3 12s ease infinite;
+}
+
+@keyframes animatedGradient4 {
+  0% { background-position: 0% 100%; }
+  50% { background-position: 100% 0%; }
+  100% { background-position: 0% 100%; }
+}
+.animated-gradient-4 {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background-size: 400% 400%;
+  animation: animatedGradient4 14s ease infinite;
+}
+
+@keyframes animatedGradient5 {
+  0% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 100% 0%; }
+}
+.animated-gradient-5 {
+  background: linear-gradient(90deg, #f7971e, #ffd200);
+  background-size: 400% 400%;
+  animation: animatedGradient5 16s ease infinite;
+}
+
+@keyframes animatedGradient6 {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animated-gradient-6 {
+  background: linear-gradient(-60deg, #355c7d, #6c5b7b, #c06c84);
+  background-size: 400% 400%;
+  animation: animatedGradient6 18s ease infinite;
+}
+
+/* 새로운 애니메이션 프리셋 */
+
+/* 7. Radial Gradient Animation */
+@keyframes animatedRadial1 {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+.animated-radial-1 {
+  background: radial-gradient(circle, #ff5f6d, #ffc371);
+  background-size: 200% 200%;
+  animation: animatedRadial1 15s ease infinite;
+}
+
+/* 8. Conic Gradient Animation */
+@keyframes animatedConic1 {
+  0% { background: conic-gradient(from 0deg, #7f7fd5, #86a8e7, #91eae4); }
+  100% { background: conic-gradient(from 360deg, #7f7fd5, #86a8e7, #91eae4); }
+}
+.animated-conic-1 {
+  animation: animatedConic1 10s linear infinite;
+}
+
+/* 9. Elliptical Gradient Animation */
+@keyframes animatedElliptical1 {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animated-elliptical-1 {
+  background: radial-gradient(ellipse at center, #ff9a9e, #fad0c4);
+  background-size: 300% 300%;
+  animation: animatedElliptical1 14s ease infinite;
+}
+
+/* 10. Alternate Conic Gradient Animation */
+@keyframes animatedConic2 {
+  0% { background: conic-gradient(from 0deg, #ffafbd, #ffc3a0); }
+  100% { background: conic-gradient(from 360deg, #ffafbd, #ffc3a0); }
+}
+.animated-conic-2 {
+  animation: animatedConic2 12s linear infinite;
+}
